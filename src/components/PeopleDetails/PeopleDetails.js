@@ -4,6 +4,8 @@ import './PersonDetails.sass';
 
 export default class PeopleDetails extends Component {
 
+    id = this.props.id;
+
     render() {
         return(
             <div className="peopleDetails">

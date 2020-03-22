@@ -20,7 +20,7 @@ export default class App extends Component {
                 <RandomPlanet />
                 <div className="peopleInfo">
                     <PeopleList />
-                    <PersonDetails />
+                    <PersonDetails id={2}/>
                 </div>
             </div>
         );

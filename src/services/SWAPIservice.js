@@ -16,6 +16,11 @@ class SWAPIservice {
         return this._transformPlanet(res);
     }
 
+    async getPeopleList() {
+        const res = await this.getResources(this._apiBase + 'people');
+        return res.results;
+    }
+
     _transformPlanet(body) {
         const regexpID = /\/([0-9]*)\/$/;
         const id = body.url.match(regexpID)[1];
@@ -27,6 +32,13 @@ class SWAPIservice {
             diameter: body.diameter
         };
     }
+
+    // _transformPeopleList(body) {
+    //     const regexpID = /\/([0-9]*)\/$/;
+    //     const id = body.url.match(regexpID)[1];
+
+    //     return body.results;
+    // }
 }
 
 export default SWAPIservice;

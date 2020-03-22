@@ -11,12 +11,13 @@ import ErrorIndicator from './../ErrorIndicator/ErrorIndicator';
 
 const RandomPlanetView = ({planet}) => {
 
-    const {title, population, rotationPeriod, diameter} = planet;
+    const {id, title, population, rotationPeriod, diameter} = planet;
+    const imgSrc = `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`
 
     return(
         <div className="randomPlanet__inner">
             <div className="randomPlanet__img">
-                <img src="https://starwars-visualguide.com/assets/img/planets/5.jpg" alt="planet_img"></img>
+                <img src={imgSrc} alt="planet_img"></img>
             </div>
             <div className="randomPlanet__info">
                 <div className="randomPlanet__title randomPlanet__detail">{title}</div>
@@ -72,7 +73,7 @@ export default class RandomPlanet extends Component {
         this.SWAPI.getPlanet(Math.floor(Math.random()*18)+4)
         .then((planet) => {
             this.onPlanetLoaded(planet);
-            console.log(planet);
+            //console.log(planet);
         })
         .catch((err) => {
             this.onError(err);
