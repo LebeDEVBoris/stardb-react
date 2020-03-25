@@ -3,10 +3,26 @@ import React from 'react';
 // Common styles
 import './../../common.sass'
 
+// Relation styles
+import './App.sass';
+
+// Components
+import Header from './../Header/Header';
+import RandomPlanet from './../RandomPlanet/RandomPlanet';
+import ItemList from './../ItemList/ItemList';
+import ItemInfo from './../ItemInfo/ItemInfo';
+
 const App = () => {
 
     return(
-        <h1>App</h1>
+        <div className="app">
+            <Header />
+            <RandomPlanet />
+            <div className="data">
+                <ItemList />
+                <ItemInfo />
+            </div>
+        </div>
     );
 }
 
