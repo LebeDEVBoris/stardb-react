@@ -12,7 +12,6 @@ export default class SWAPIService {
         // console.log('Got data! (', url, ')');
 
         if (!data.ok) {
-            console.log(data.status);
             throw new Error('Could not get data from SWAPI.');
         }
         
@@ -20,6 +19,7 @@ export default class SWAPIService {
     }
 
     getPlanet = async (id) => {
+        if (id === null) return;
         const data = await this.requestData(this._apiBase + `planets/${id}`);
         const itemId = data.url.match(this._regExp)[1];
         // https://starwars-visualguide.com/assets/img/planets/11.jpg
@@ -33,6 +33,64 @@ export default class SWAPIService {
             img: this._imgBase + `planets/${itemId}.jpg`
         };
         return res;
+    }
+
+    getAllStarships = async () => {
+        const res = await this.requestData(this._apiBase + 'starships');
+        const data = [];
+        res.results.forEach((elem) => {
+            const id = elem.url.match(this._regExp)[1];
+            data.push({
+                id: id,
+                name: elem.name,
+                model: elem.model,
+                manufacturer: elem.manufacturer,
+                costInCredits: elem.cost_in_credits,
+                length: elem.length,
+                crew: elem.crew,
+                passengers: elem.passengers,
+                cargoCapacity: elem.cargo_capacity,
+                img: this._imgBase + `starships/${id}.jpg`
+            });
+        });
+        return data;
+    }
+
+    getStarship = async (id) => {
+        if (id === null) return;
+        const data = await this.requestData(this._apiBase + `starships/${id}`);
+        const itemId = data.url.match(this._regExp)[1];
+        const res = {
+            id: itemId,
+            name: data.name,
+            model: data.model,
+            manufacturer: data.manufacturer,
+            costInCredits: data.cost_in_credits,
+            length: data.length,
+            crew: data.crew,
+            passengers: data.passengers,
+            cargoCapacity: data.cargo_capacity,
+            img: this._imgBase + `starships/${itemId}.jpg`
+        };
+        return res;
+    }
+
+    getAllPlanets = async () => {
+        const res = await this.requestData(this._apiBase + 'planets');
+        const data = [];
+        res.results.forEach((elem) => {
+            const id = elem.url.match(this._regExp)[1];
+            data.push({
+                id: id,
+                name: elem.name,
+                population: elem.population,
+                rotationPeriod: elem.rotation_period,
+                diameter: elem.diameter,
+                img: this._imgBase + `planets/${id}.jpg`
+            });
+        });
+        return data;
+        
     }
 
     //Due to a API bug we uses that way to get all peoples
@@ -50,42 +108,6 @@ export default class SWAPIService {
             });
         });
         return data;
-
-    // getAllPeople = async () => {
-    //     let data = [];
-    //     setTimeout(() => {
-    //         data = [
-    //             {
-    //                 id: 1,
-    //                 name: 'Person 1',
-    //                 gender: 'Male',
-    //                 eye: 'Red',
-    //                 img: this._imgBase + `characters/1.jpg`
-    //             },
-    //             {
-    //                 id: 2,
-    //                 name: 'Person 2',
-    //                 gender: 'Male',
-    //                 eye: 'Red',
-    //                 img: this._imgBase + `characters/2.jpg`
-    //             },
-    //             {
-    //                 id: 3,
-    //                 name: 'Person 1',
-    //                 gender: 'Male',
-    //                 eye: 'Red',
-    //                 img: this._imgBase + `characters/3.jpg`
-    //             },
-    //             {
-    //                 id: 4,
-    //                 name: 'Person 4',
-    //                 gender: 'Male',
-    //                 eye: 'Red',
-    //                 img: this._imgBase + `characters/4.jpg`
-    //             },
-    //         ]
-    //     }, 500);
-    //     return data;
     }
 
     // Due to a API bug we uses that way to get all peoples

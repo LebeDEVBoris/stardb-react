@@ -22,9 +22,9 @@ const ItemInfo = (props) => {
     const content = keys.map((elem) => {
         const tempString = elem[0].toLowerCase() + elem.slice(1, elem.length+1);
         const tempValue = data[tempString];
-        const value = tempValue[0].toUpperCase() + tempValue.slice(1, tempString.length + 1);
+        const value = tempValue[0].toUpperCase() + tempValue.slice(1, tempValue.length + 1);
         return(
-            <li>
+            <li key={props.data.id + elem}>
                 {elem}: {value}
             </li>
         );

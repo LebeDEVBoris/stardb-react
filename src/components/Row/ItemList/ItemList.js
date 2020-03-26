@@ -6,6 +6,7 @@ class ItemList extends Component {
 
     render() {
         const data = this.props.data;
+        if (data === null) return (<h1>Error</h1>);
         const content = data.map((elem) => {
             return(
             <li 

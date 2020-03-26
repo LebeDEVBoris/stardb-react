@@ -16,7 +16,6 @@ class RandomPlanet extends Component {
     }
 
     update = () => {
-        console.log('updating...');
         this.setState({loading: true, data: null});
         this.SWAPI.getPlanet(Math.floor(Math.random()*15+2))
                     .then((data) => this.setState({loading: false, data: data}));

@@ -7,7 +7,7 @@ import SWAPIService from '../../../services/SWAPIService';
 
 const SWAPI = new SWAPIService();
 
-class People extends Component {
+class Planets extends Component {
 
     state = {
         selected: null
@@ -18,16 +18,16 @@ class People extends Component {
     }
 
     render() {
-        const PeopleInfo = withData(ItemInfo, SWAPI.getPeople, this.state.selected);
+        const PlanetInfo = withData(ItemInfo, SWAPI.getPlanet, this.state.selected);
         return(
             <Row 
-                left={<PeopleList onItemSelected={this.onItemSelected}/>} 
-                right={<PeopleInfo onItemSelected={this.state.selected}/>}
+                left={<PlanetsList onItemSelected={this.onItemSelected}/>} 
+                right={<PlanetInfo onItemSelected={this.state.selected}/>}
             />
         );
     }
 }
 
-const PeopleList = withData(ItemList, SWAPI.getAllPeople);
+const PlanetsList = withData(ItemList, SWAPI.getAllPlanets);
 
-export default People;
+export default Planets;
