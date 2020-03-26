@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import './Header.sass';
 
@@ -6,13 +7,13 @@ const Header = () => {
     return(
         <header className="header">
             <div className="header__row">
-                <div className="header__logo">StarDB</div>
+                <div className="header__logo"><Link to="/">StarDB</Link></div>
             </div>
             <div className="header__navbar">
                 <ul>
-                    <li><a href="vk.com">People</a></li>
-                    <li><a href="vk.com">Planets</a></li>
-                    <li><a href="vk.com">Starships</a></li>
+                    <li><Link to="/people">People</Link></li>
+                    <li><Link to="/planets">Planets</Link></li>
+                    <li><Link to="/starships">Starships</Link></li>
                 </ul>
             </div>
         </header>
