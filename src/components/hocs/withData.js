@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import Spinner from './../Spinner/Spinner';
 
-const withData = (View, getData) => {
+const withData = (View, getData, id = undefined) => {
     return class extends Component {
         
-        onItemSelected = (id) => {
-            console.log('Selected: ', id);
-        }
-
         state = {
             loading: true,
             error: false,
@@ -15,7 +11,7 @@ const withData = (View, getData) => {
         }
 
         componentDidMount() {
-            getData()
+            getData(id)
                 .then((res) => {
                     this.setState({loading: false, error: false, data: res})
                 })
@@ -28,7 +24,7 @@ const withData = (View, getData) => {
             }
 
             return(
-                <View data={this.state.data} onItemSelected={this.onItemSelected}/>
+                <View data={this.state.data} onItemSelected={this.props.onItemSelected}/>
             );
         }
     }

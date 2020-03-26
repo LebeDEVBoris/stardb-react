@@ -35,7 +35,7 @@ export default class SWAPIService {
         return res;
     }
 
-    // Due to a API bug we uses that way to get all peoples
+    //Due to a API bug we uses that way to get all peoples
     getAllPeople = async () => {
         const res = await this._getAllPeopleReqests();
         const data = [];
@@ -49,8 +49,43 @@ export default class SWAPIService {
                 img: this._imgBase + `characters/${id}.jpg`
             });
         });
-        console.log('data = ', data);
         return data;
+
+    // getAllPeople = async () => {
+    //     let data = [];
+    //     setTimeout(() => {
+    //         data = [
+    //             {
+    //                 id: 1,
+    //                 name: 'Person 1',
+    //                 gender: 'Male',
+    //                 eye: 'Red',
+    //                 img: this._imgBase + `characters/1.jpg`
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: 'Person 2',
+    //                 gender: 'Male',
+    //                 eye: 'Red',
+    //                 img: this._imgBase + `characters/2.jpg`
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: 'Person 1',
+    //                 gender: 'Male',
+    //                 eye: 'Red',
+    //                 img: this._imgBase + `characters/3.jpg`
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: 'Person 4',
+    //                 gender: 'Male',
+    //                 eye: 'Red',
+    //                 img: this._imgBase + `characters/4.jpg`
+    //             },
+    //         ]
+    //     }, 500);
+    //     return data;
     }
 
     // Due to a API bug we uses that way to get all peoples
@@ -59,6 +94,20 @@ export default class SWAPIService {
         for (let i = 1; i < 10; i++) {
             await this.requestData(this._apiBase + `people/${i}`)
                 .then((obj) => {data.push(obj)});    
+        }
+        return data;
+    }
+
+    getPeople = async (id) => {
+        if (id === null) return;
+        const res = await this.requestData(this._apiBase + `people/${id}`);
+        const idItem = res.url.match(this._regExp)[1];
+        const data = {
+            id: idItem,
+            name: res.name,
+            gender: res.gender,
+            eye: res.eye_color,
+            img: this._imgBase + `characters/${id}.jpg`
         }
         return data;
     }

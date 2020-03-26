@@ -10,7 +10,7 @@ class ItemList extends Component {
             return(
             <li 
                 key={elem.id}
-                onClick={() => {this.props.onItemSelected(elem.id)}}>
+                onClick={() => this.props.onItemSelected(elem.id)}>
                     {elem.name}
             </li>
             );
