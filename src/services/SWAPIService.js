@@ -27,8 +27,11 @@ export default class SWAPIService {
         const res = {
             id: itemId,
             name: data.name,
-            population: data.population,
             rotationPeriod: data.rotation_period,
+            climate: data.climate,
+            gravity: data.gravity,
+            terrain: data.terrain,
+            population: data.population,
             diameter: data.diameter,
             img: this._imgBase + `planets/${itemId}.jpg`
         };

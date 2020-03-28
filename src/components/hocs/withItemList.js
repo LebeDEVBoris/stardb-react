@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import Spinner from '../Spinner/Spinner';
+import Spinner from './../Spinner/ItemList/Spinner';
 
 const withItemList = (View) => {
     return class extends Component {   
@@ -15,9 +15,9 @@ const withItemList = (View) => {
             .getData()
             .then((res) => {
                 this.setState({
-                    // data: null,
-                    // loading: true,
-                    // error: false,
+                    data: null,
+                    loading: true,
+                    error: false,
 
                     data: res,
                     loading: false,
@@ -39,7 +39,7 @@ const withItemList = (View) => {
                                                 data={data} 
                                                 onItemSelected={this.props.onItemSelected}/> 
                                                     : 
-                                                <h1>Loading...</h1>
+                                                <Spinner />
             
 
             return(
