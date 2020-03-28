@@ -1,3 +1,4 @@
+import imgage from './../images/no-data.png';
 
 export default class SWAPIService {
 
@@ -24,6 +25,18 @@ export default class SWAPIService {
         const itemId = data.url.match(this._regExp)[1];
         // https://starwars-visualguide.com/assets/img/planets/11.jpg
         // _imgBase = 'https://starwars-visualguide.com/assets/img/'
+
+        let img;
+        await fetch( this._imgBase + 'planets/' + id + '.jpg')
+            .then((res) => {
+                if (res.status === 200) {
+                    img = res.url;
+                }
+                if (res.status === 404) {
+                    img = imgage;
+                }
+            });
+
         const res = {
             id: itemId,
             name: data.name,
@@ -33,7 +46,7 @@ export default class SWAPIService {
             terrain: data.terrain,
             population: data.population,
             diameter: data.diameter,
-            img: this._imgBase + `planets/${itemId}.jpg`
+            img: img
         };
         return res;
     }
@@ -78,8 +91,12 @@ export default class SWAPIService {
         return res;
     }
 
-    getAllPlanets = async () => {
-        const res = await this.requestData(this._apiBase + 'planets');
+    getAllPlanets = async (slug) => {
+        if ((slug === undefined) || (slug === null)) slug = '';
+        const request = this._apiBase + 'planets' + slug;
+        //console.log('sending request: ', request);
+        const res = await this.requestData(this._apiBase + 'planets' + slug);
+        
         const data = [];
         res.results.forEach((elem) => {
             const id = elem.url.match(this._regExp)[1];
@@ -89,9 +106,10 @@ export default class SWAPIService {
                 population: elem.population,
                 rotationPeriod: elem.rotation_period,
                 diameter: elem.diameter,
-                img: this._imgBase + `planets/${id}.jpg`
+                count: res.count
             });
         });
+        //console.log('data received: ', data);
         return data;
         
     }
