@@ -42,6 +42,9 @@
 
 .lds-css {
   margin: 0 auto;
+  position: absolute;
+  left: 40%;
+  top: 10%;
 }
 
 .lds-double-ring {
@@ -49,8 +52,8 @@
 }
 .lds-double-ring div {
   position: absolute;
-  width: 160px;
-  height: 160px;
+  width: 280px;
+  height: 280px;
   top: 20px;
   left: 20px;
   border-radius: 50%;
@@ -60,8 +63,8 @@
   animation: lds-double-ring 1.5s linear infinite;
 }
 .lds-double-ring div:nth-child(2) {
-  width: 140px;
-  height: 140px;
+  width: 260px;
+  height: 260px;
   top: 30px;
   left: 30px;
   border-color: transparent #cc4545 transparent #cc4545;
