@@ -5,7 +5,16 @@ import ItemInfo from './../../Row/ItemInfo/ItemInfo'
 const mapMethodsToProps = (swapi, id) => {
     return {
         getData: swapi.getPlanet,
-        id: id
+        id: id,
+        fields: {
+            name: 'Name: ',
+            population: 'Population: ',
+            rotationPeriod: 'Rotation Period: ',
+            climate: 'Climate: ',
+            gravity: 'Gravity: ',
+            terrain: 'Terrain: ',
+            diameter: 'Diameter: ' 
+        }
     }
 }
 
