@@ -6,12 +6,14 @@ import Row from './../../Row/Row';
 class Planets extends Component {
 
     state = {
-        selectedItem: null
+        selectedItem: null,
+        selectedPage: 1
     }
 
     onItemSelected = (id) => {
         this.setState({selectedItem: id});
     }
+
 
     render() {
         return(
