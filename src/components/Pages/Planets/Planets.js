@@ -1,33 +1,21 @@
 import React, {Component} from 'react';
-import ItemList from '../../Row/ItemList/ItemList';
-import ItemInfo from '../../Row/ItemInfo/ItemInfo';
+import PlanetsList from './../../SWComponents/Planets/PlanetsList';
 import Row from './../../Row/Row';
-import withData from '../../hocs/withData';
-import SWAPIService from '../../../services/SWAPIService';
-
-const SWAPI = new SWAPIService();
 
 class Planets extends Component {
 
-    state = {
-        selected: null
-    }
-
-    onItemSelected = (id) => {
-        this.setState({selected: id});
-    }
-
     render() {
-        const PlanetInfo = withData(ItemInfo, SWAPI.getPlanet, this.state.selected);
         return(
-            <Row 
-                left={<PlanetsList onItemSelected={this.onItemSelected}/>} 
-                right={<PlanetInfo onItemSelected={this.state.selected}/>}
-            />
+            <>
+                <h1>Planets</h1>
+                <Row
+                    // <h1>h1</h1>
+                    left={<PlanetsList />}
+                    right={<h1>Right</h1>}
+                />
+            </>
         );
     }
 }
-
-const PlanetsList = withData(ItemList, SWAPI.getAllPlanets);
 
 export default Planets;

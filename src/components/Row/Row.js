@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Row = (props) => {
-    
+
     return(
         <div className="data">
             {props.left}
