@@ -8,42 +8,27 @@ import './../../common.sass'
 import './App.sass';
 
 // Components
-import Header from './../Header/Header';
+// import Header from './../Header/Header';
 import RandomPlanet from './../RandomPlanet/RandomPlanet';
 import Welcome from './../Welcome/Welcome';
-import People from './../Pages/People/People';
 import Planets from './../Pages/Planets/Planets';
-import Starships from './../Pages/Starships/Starships';
-import Row from './../Row/Row';
+
+import SWAPIService from './../../services/SWAPIService';
+import {SWAPIServiceProvider} from './../../context/SWAPIServiceContext';
 
 class App extends Component {
 
-    render() {
-        return(
-            <Router>
-                <div className="app">
-                    <Header />
-                    <RandomPlanet />
-                    
-                    {/* Main Page */}
-                    <Route path="/" exact component={Welcome}></Route>
-    
-                    {/* People Page */}
-                    <Route path="/people">
-                        <People />
-                    </Route>
-    
-                    {/* Planets page */}
-                    <Route path="/planets">
-                        <Planets />
-                    </Route>
+    swapi = new SWAPIService();
 
-                    {/* Starships page */}
-                    <Route path="/starships">
-                        <Starships />
-                    </Route>
+
+    render() {
+
+        return(
+            <SWAPIServiceProvider value={this.swapi} >
+                <div className="app">
+                    <Planets />
                 </div>
-            </Router>
+            </SWAPIServiceProvider>
         );
     }
 }

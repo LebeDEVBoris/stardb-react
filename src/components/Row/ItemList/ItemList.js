@@ -1,29 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 
+//import Spinner from './../../Spinner/Spinner';
 import './ItemList.sass';
 
-class ItemList extends Component {
 
-    render() {
-        const data = this.props.data;
-        if (data === null) return (<h1>Error</h1>);
-        const content = data.map((elem) => {
-            return(
-            <li 
-                key={elem.id}
-                onClick={() => this.props.onItemSelected(elem.id)}>
-                    {elem.name}
+const ItemList = (props) => {
+    
+    const content = props.data.map((elem) => {
+        return(
+            <li key={elem.id} onClick={() => props.onItemSelected(elem.id)}>
+                {elem.name}
             </li>
-            );
-        });
-        return (
-            <div className="data__list">
-                <ul>
-                    {content}
-                </ul>
-            </div>
         );
-    }
+    });
+
+    return(
+        content
+    );
 }
 
 export default ItemList;
