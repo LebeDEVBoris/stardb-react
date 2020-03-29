@@ -3,10 +3,8 @@ import React from 'react';
 import './ItemInfo.sass';
 
 const ItemInfo = (props) => {
-    console.log('iteminfo props = ', props);
     
     const { data } = props;
-    //console.log('pop', population);
     return(
         <>
             <div className="iteminfo__img">

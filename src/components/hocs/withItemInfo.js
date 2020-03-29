@@ -24,7 +24,7 @@ const withItemInfo = (View) => {
                     const fields = this.props.fields;
                     const arr = [];
                     for (const property in fields) {
-                        const elem = (<li>{fields[property]} <span>{res[property]}</span></li>);
+                        const elem = (<li key={property}>{fields[property]} <span>{res[property]}</span></li>);
                         arr.push(elem);
                     }
                     this.setState({content: arr});
