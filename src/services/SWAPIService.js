@@ -51,30 +51,21 @@ export default class SWAPIService {
         return res;
     }
 
-    getAllStarships = async () => {
-        const res = await this.requestData(this._apiBase + 'starships');
-        const data = [];
-        res.results.forEach((elem) => {
-            const id = elem.url.match(this._regExp)[1];
-            data.push({
-                id: id,
-                name: elem.name,
-                model: elem.model,
-                manufacturer: elem.manufacturer,
-                costInCredits: elem.cost_in_credits,
-                length: elem.length,
-                crew: elem.crew,
-                passengers: elem.passengers,
-                cargoCapacity: elem.cargo_capacity,
-                img: this._imgBase + `starships/${id}.jpg`
-            });
-        });
-        return data;
-    }
-
     getStarship = async (id) => {
         if (id === null) return;
         const data = await this.requestData(this._apiBase + `starships/${id}`);
+
+        let img;
+        await fetch( this._imgBase + 'starships/' + id + '.jpg')
+            .then((res) => {
+                if (res.status === 200) {
+                    img = res.url;
+                }
+                if (res.status === 404) {
+                    img = imgage;
+                }
+            });
+
         const itemId = data.url.match(this._regExp)[1];
         const res = {
             id: itemId,
@@ -85,37 +76,36 @@ export default class SWAPIService {
             length: data.length,
             crew: data.crew,
             passengers: data.passengers,
-            cargoCapacity: data.cargo_capacity,
-            img: this._imgBase + `starships/${itemId}.jpg`
+            consumables: data.consumables,
+            hyperdriveRating: data.hyperdrive_rating,
+            MGLT: data.MGLT,
+            starshipClass: data.starship_class,
+            img: img
         };
+
         return res;
     }
 
     getAllPlanets = async (slug) => {
         if ((slug === undefined) || (slug === null)) slug = '';
         const request = this._apiBase + 'planets' + slug;
-        //console.log('sending request: ', request);
         const res = await this.requestData(this._apiBase + 'planets' + slug);
-        
+       
         const data = [];
         res.results.forEach((elem) => {
             const id = elem.url.match(this._regExp)[1];
             data.push({
                 id: id,
                 name: elem.name,
-                population: elem.population,
-                rotationPeriod: elem.rotation_period,
-                diameter: elem.diameter,
                 count: res.count
             });
         });
-        //console.log('data received: ', data);
         return data;
-        
     }
 
     //Due to a API bug we uses that way to get all peoples
-    getAllPeople = async () => {
+    getAllPeople = async (slug) => {
+        if ((slug === undefined) || (slug === null)) slug = '';
         const res = await this._getAllPeopleReqests();
         const data = [];
         res.forEach((elem) => {
@@ -125,7 +115,23 @@ export default class SWAPIService {
                 name: elem.name,
                 gender: elem.gender,
                 eye: elem.eye_color,
-                img: this._imgBase + `characters/${id}.jpg`
+                img: this._imgBase + `characters/${id}.jpg`,
+                count: 1
+            });
+        });
+        return data;
+    }
+
+    getAllStarships = async (slug) => {
+        if ((slug === undefined) || (slug === null)) slug = '';
+        const res = await this.requestData(this._apiBase + 'starships' + slug);
+        const data = [];
+        res.results.forEach((elem) => {
+            const id = elem.url.match(this._regExp)[1];
+            data.push({
+                id: id,
+                name: elem.name,
+                count: res.count
             });
         });
         return data;

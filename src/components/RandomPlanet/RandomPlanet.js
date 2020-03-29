@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './RandomPlanet.sass';
 
-// import Spinner from './../Spinner/Spinner';
+import Spinner from './../Spinner/RandomPlanet/Spinner';
 
 import SWAPIService from './../../services/SWAPIService';
 
@@ -33,7 +33,7 @@ class RandomPlanet extends Component {
     render() {
         
         const data = this.state.data;
-        const spinner = this.state.loading ? <h1>Loading...</h1> : null;
+        const spinner = this.state.loading ? <Spinner /> : null;
         const content = !this.state.loading ? <RandomPlanetView data={data}/> : null
       
         return(
